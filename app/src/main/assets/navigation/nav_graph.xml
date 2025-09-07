@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/gesture_info_fragment">
+
+    <fragment
+        android:id="@+id/permissions_fragment"
+        android:name="com.example.capture.presentation.fragment.PermissionsFragment"
+        android:label="PermissionsFragment">
+
+        <action
+            android:id="@+id/action_permissions_to_camera"
+            app:destination="@id/camera_fragment"
+            app:popUpTo="@id/permissions_fragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/camera_fragment"
+        android:name="com.example.capture.presentation.fragment.CameraFragment"
+        android:label="CameraFragment">
+
+        <action
+            android:id="@+id/action_camera_to_permissions"
+            app:destination="@id/permissions_fragment"
+            app:popUpTo="@id/camera_fragment"
+            app:popUpToInclusive="true" />
+            
+        <action
+            android:id="@+id/action_camera_to_gesture_info"
+            app:destination="@id/gesture_info_fragment" />
+    </fragment>
+
+
+        
+    <fragment
+        android:id="@+id/gesture_info_fragment"
+        android:name="com.example.capture.presentation.fragment.GestureInfoFragment"
+        android:label="Gesture Info">
+        
+        <action
+            android:id="@+id/action_gesture_info_to_camera"
+            app:destination="@id/camera_fragment"
+            app:popUpTo="@id/gesture_info_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

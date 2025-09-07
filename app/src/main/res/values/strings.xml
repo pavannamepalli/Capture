@@ -1,0 +1,159 @@
+<resources>
+    <string name="app_name">Capture</string>
+
+    <string name="media_pipe">MediaPipe</string>
+
+    <string name="alt_bottom_sheet_chevron">Bottom sheet expandable indicator</string>
+
+    <string name="alt_bottom_sheet_max_results_button_minus">Decreasing
+        maximum hand results button</string>
+    <string name="alt_bottom_sheet_max_results_button_plus">Increasing
+        maximum hand results button</string>
+    <string name="alt_bottom_sheet_threshold_button_minus">Decreasing
+        threshold of hand detect results button</string>
+    <string name="alt_bottom_sheet_threshold_button_plus">Increasing
+        threshold of hand detect results button</string>
+    <string name="menu_camera">Camera</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="tv_gallery_placeholder">Click + to add an image or a video
+        to begin running the hand landmarker.</string>
+
+    <string name="label_inference_time">Inference Time</string>
+    <string name="label_fps">Frames per Second</string>
+    <string name="label_hand_detection_confidence_threshold">Detection
+        Threshold</string>
+    <string name="label_hand_tracking_confidence_threshold">Tracking
+        Threshold</string>
+    <string name="label_hand_presence_confidence_threshold">Presence
+        Threshold</string>
+    <string name="label_num_hands">Number of Hands</string>
+    <string name="label_delegate">Delegate</string>
+
+    <string-array name="delegate_spinner_titles">
+        <item>CPU</item>
+        <item>GPU</item>
+    </string-array>
+
+    <string name="error_no_internet_connection">No internet connection available</string>
+    <string name="error_request_timeout">Request timed out. Please try again.</string>
+    <string name="error_server_error">Server error occurred. Please try again later.</string>
+    <string name="error_network_error">Network error: %1$s</string>
+
+    <string name="error_camera_permission_denied">Camera permission is required to use this feature</string>
+    <string name="error_camera_not_available">Camera is not available on this device</string>
+    <string name="error_camera_initialization_failed">Failed to initialize camera</string>
+    <string name="error_camera_capture_failed">Failed to capture photo</string>
+    <string name="error_camera_recording_failed">Failed to record video</string>
+    <string name="error_camera_operation_failed">Camera operation failed: %1$s</string>
+
+    <string name="error_gesture_model_not_loaded">Gesture detection model is not loaded</string>
+    <string name="error_gesture_model_initialization_failed">Failed to initialize gesture detection</string>
+    <string name="error_hand_not_detected">No hand detected in the frame</string>
+    <string name="error_invalid_hand_landmarks">Invalid hand landmarks detected</string>
+    <string name="error_gesture_detection_failed">Gesture detection failed</string>
+
+    <string name="error_storage_permission_denied">Storage permission is required to save files</string>
+    <string name="error_insufficient_storage">Insufficient storage space</string>
+    <string name="error_file_not_found">File not found</string>
+    <string name="error_file_creation_failed">Failed to create file</string>
+    <string name="error_file_save_failed">Failed to save file</string>
+    <string name="error_file_operation_failed">File operation failed: %1$s</string>
+
+    <string name="error_unknown_error">An unknown error occurred</string>
+    <string name="error_unexpected_error">An unexpected error occurred: %1$s</string>
+
+    <string name="gesture_palm_name">Palm</string>
+    <string name="gesture_palm_description">Capture photo</string>
+    <string name="gesture_palm_instruction">Show your open palm within the detection box</string>
+
+    <string name="gesture_peace_sign_name">Peace Sign</string>
+    <string name="gesture_peace_sign_start_description">Start video recording</string>
+    <string name="gesture_peace_sign_stop_description">Stop video recording</string>
+    <string name="gesture_peace_sign_instruction">Show peace sign (index and middle finger up)</string>
+    <string name="gesture_peace_sign_stop_instruction">Show peace sign again to stop recording</string>
+
+    <string name="gesture_thumbs_up_name">Thumbs Up</string>
+    <string name="gesture_thumbs_up_description">Switch camera</string>
+    <string name="gesture_thumbs_up_instruction">Show thumbs up gesture</string>
+
+    <string name="gesture_ok_sign_name">OK Sign</string>
+    <string name="gesture_ok_sign_description">Open gallery</string>
+    <string name="gesture_ok_sign_instruction">Make OK sign (thumb and index finger circle)</string>
+
+    <string name="gesture_pinch_zoom_in_name">Pinch Zoom In</string>
+    <string name="gesture_pinch_zoom_in_description">Zoom in camera</string>
+    <string name="gesture_pinch_zoom_in_instruction">Pinch thumb and index finger together</string>
+
+    <string name="gesture_pinch_zoom_out_name">Pinch Zoom Out</string>
+    <string name="gesture_pinch_zoom_out_description">Zoom out camera</string>
+    <string name="gesture_pinch_zoom_out_instruction">Spread thumb and index finger apart</string>
+
+    <string name="gesture_three_fingers_name">Three Fingers</string>
+    <string name="gesture_three_fingers_description">Toggle flash</string>
+    <string name="gesture_three_fingers_instruction">Show thumb, index, and pinky up (middle and ring fingers closed)</string>
+
+    <string name="cooldown_2_seconds">2 seconds</string>
+    <string name="cooldown_3_seconds">3 seconds</string>
+    <string name="cooldown_1_second">1 second</string>
+
+    <string name="ui_show_gestures_within_box">Show gestures within the box</string>
+    <string name="ui_user_shown_gesture">User shown %1$s %2$s</string>
+    <string name="ui_recording_indicator">REC</string>
+    <string name="ui_action_completed">Action completed</string>
+    <string name="ui_error_prefix">Error: %1$s</string>
+    <string name="ui_gestures_blocked_while_recording">Gestures are blocked while recording. Stop video first.</string>
+
+    <string name="gesture_display_open_palm">Open Palm</string>
+    <string name="gesture_display_peace_sign">Peace Sign</string>
+    <string name="gesture_display_thumbs_up">Thumbs Up</string>
+    <string name="gesture_display_ok_sign">OK Sign</string>
+    <string name="gesture_display_pinch_zoom_in">Pinch Zoom In</string>
+    <string name="gesture_display_pinch_zoom_out">Pinch Zoom Out</string>
+    <string name="gesture_display_three_fingers_up">Three Fingers Up</string>
+
+    <string name="gesture_controls_title">Gesture Controls</string>
+    <string name="gesture_controls_subtitle">Learn how to control your camera with hand gestures</string>
+    <string name="gesture_controls_instruction">💡 Show gestures within the detection box for best results</string>
+    <string name="cooldown_info_title">⏱️ Cooldown Information</string>
+    <string name="cooldown_info_description">Each gesture has a cooldown period to prevent accidental triggers. Wait for the cooldown to complete before using the same gesture again.</string>
+
+    <string name="action_photo_captured">Photo captured and saved to memory</string>
+    <string name="action_video_recording_started">Video recording started</string>
+    <string name="action_video_recording_stopped">Video recording stopped and video saved to memory</string>
+    <string name="action_flash_toggled">Flash toggled</string>
+    <string name="action_camera_switched">Camera switched</string>
+    <string name="action_zoomed_in">Zoomed in</string>
+    <string name="action_zoomed_out">Zoomed out</string>
+    <string name="action_gallery_opened">Gallery opened</string>
+    <string name="action_no_gesture_detected">No gesture detected</string>
+
+    <string name="cooldown_try_gesture_in">Try gesture in %1$ds</string>
+    <string name="cooldown_try_other_gesture">Try other gesture</string>
+    <string name="cooldown_video_period">Video cooldown period for %1$ds</string>
+    <string name="cooldown_video_start_period">Video start cooldown period for %1$ds</string>
+    <string name="cooldown_flash_toggle_remaining">Flash toggle cooldown: %1$ds remaining</string>
+    <string name="cooldown_camera_switch_remaining">Camera switch cooldown: %1$ds remaining</string>
+    <string name="cooldown_gestures_blocked_recording">Gestures blocked while recording</string>
+
+    <string name="permission_camera">Camera</string>
+    <string name="permission_microphone">Microphone</string>
+    <string name="permission_camera_required">Camera permission required</string>
+    <string name="permission_request_granted">Permission request granted</string>
+    <string name="permission_request_denied">Permission request denied</string>
+    <string name="permissions_required">Permissions required: %1$s</string>
+
+    <string name="gallery_unsupported_data_type">Unsupported data type.</string>
+    <string name="gallery_error_running_landmarker">Error running hand landmarker.</string>
+    <string name="gallery_handlandmarker_error">HandLandmarker error: %1$s (code: %2$d)</string>
+    <string name="gallery_captured_photos">Captured Photos</string>
+
+    <string name="action_name_gesture">Gesture</string>
+    <string name="action_name_unknown">Unknown</string>
+
+    <string name="performance_initializing">Performance: Initializing...</string>
+    <string name="frame_processor_ready">FrameProcessor: Ready</string>
+    <string name="gesture_handler_ready">GestureHandler: Ready</string>
+    <string name="ui_updater_ready">UIUpdater: Ready</string>
+    <string name="inference_time_default">0ms</string>
+
+   </resources>
