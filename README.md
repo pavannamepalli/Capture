@@ -90,7 +90,6 @@ The application supports **7 distinct hand gestures**:
 ### Machine Learning
 - **MediaPipe**: Google's ML framework for hand landmark detection
 - **Hand Landmarker**: Real-time hand tracking and gesture recognition
-- **TensorFlow Lite**: On-device ML inference
 
 ### Architecture & Concurrency
 - **MVVM Pattern**: Clean separation of concerns
@@ -298,4 +297,3 @@ For support, questions, or feature requests:
 
 ---
 
-**Built with ❤️ using Kotlin, MediaPipe, and CameraX**
