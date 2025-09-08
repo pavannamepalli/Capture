@@ -11,6 +11,7 @@ import com.example.capture.domain.model.CameraActionResult
 import com.example.capture.domain.model.GestureResult
 import com.example.capture.domain.model.GestureType
 import com.example.capture.presentation.ui.GestureProcessingUiState
+import androidx.camera.core.CameraSelector
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -39,6 +40,14 @@ class ProcessGestureUseCase(
 
     suspend fun processGesture(gesture: GestureResult): Result<CameraActionResult> {
         val currentTime = System.currentTimeMillis()
+        
+        val currentMessage = _uiState.value.cooldownMessage
+        if (currentMessage == context.getString(R.string.cooldown_try_other_gesture) ||
+            currentMessage == context.getString(R.string.action_can_stop_video)) {
+            _uiState.value = _uiState.value.copy(
+                showCooldown = false, cooldownMessage = null
+            )
+        }
 
         if (lastGestureTime != -1L) {
             val timeSinceLastGesture = currentTime - lastGestureTime
@@ -140,6 +149,17 @@ class ProcessGestureUseCase(
             }
 
             GestureType.THREE_FINGERS_UP -> {
+                val isFrontCamera = cameraRepository.cameraState.value.cameraFacing == CameraSelector.LENS_FACING_FRONT
+                if (isFrontCamera) {
+                    return Result.Success(
+                        CameraActionResult(
+                            action = CameraAction.TOGGLE_FLASH,
+                            success = true,
+                            message = context.getString(R.string.action_flash_front_camera)
+                        )
+                    )
+                }
+                
                 if (lastFlashToggleTime == -1L) {
                 } else {
                     val timeSinceFlashToggle = currentTime - lastFlashToggleTime
@@ -184,7 +204,6 @@ class ProcessGestureUseCase(
         if (result.isSuccess) {
             lastGestureTime = currentTime
 
-            showActionFeedbackMessage(action)
 
             if (action == CameraAction.START_VIDEO_RECORDING) {
                 lastVideoStartTime = currentTime
@@ -257,46 +276,60 @@ class ProcessGestureUseCase(
         )
     }
 
-    private fun showActionFeedbackMessage(action: CameraAction) {
-        val message = when (action) {
-            CameraAction.CAPTURE_PHOTO -> context.getString(R.string.action_photo_captured)
-            CameraAction.START_VIDEO_RECORDING -> context.getString(R.string.action_video_recording_started)
-            CameraAction.STOP_VIDEO_RECORDING -> context.getString(R.string.action_video_recording_stopped)
-            CameraAction.TOGGLE_FLASH -> context.getString(R.string.action_flash_toggled)
-            CameraAction.SWITCH_CAMERA -> context.getString(R.string.action_camera_switched)
-            CameraAction.ZOOM_IN -> context.getString(R.string.action_zoomed_in)
-            CameraAction.ZOOM_OUT -> context.getString(R.string.action_zoomed_out)
-            CameraAction.OPEN_GALLERY -> context.getString(R.string.action_gallery_opened)
-        }
-
-        _uiState.value = _uiState.value.copy(
-            cooldownMessage = message, showCooldown = true
-        )
-
-        kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.Main).launch {
-            delay(2000L)
-            _uiState.value = _uiState.value.copy(
-                showCooldown = false, cooldownMessage = null
-            )
-        }
-    }
 
     private fun startMessageTimingSequence(action: CameraAction) {
         kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.Main).launch {
             try {
-                delay(2000L)
+                val cooldownDuration = when (action) {
+                    CameraAction.CAPTURE_PHOTO -> universalGestureCooldownMs
+                    CameraAction.START_VIDEO_RECORDING -> videoStartCooldownMs
+                    CameraAction.STOP_VIDEO_RECORDING -> videoStopCooldownMs
+                    CameraAction.TOGGLE_FLASH -> flashToggleCooldownMs
+                    CameraAction.SWITCH_CAMERA -> cameraSwitchCooldownMs
+                    CameraAction.ZOOM_IN -> universalGestureCooldownMs
+                    CameraAction.ZOOM_OUT -> universalGestureCooldownMs
+                    CameraAction.OPEN_GALLERY -> universalGestureCooldownMs
+                    else -> universalGestureCooldownMs
+                }
 
-                if (action != CameraAction.START_VIDEO_RECORDING) {
-                    updateTryOtherGestureUI()
-
+                val startTime = System.currentTimeMillis()
+                
+                while (true) {
+                    val elapsed = System.currentTimeMillis() - startTime
+                    val remaining = (cooldownDuration - elapsed) / 1000
+                    
+                    if (remaining <= 0) {
+                        when (action) {
+                            CameraAction.START_VIDEO_RECORDING -> {
+                                _uiState.value = _uiState.value.copy(
+                                    cooldownMessage = context.getString(R.string.action_can_stop_video),
+                                    showCooldown = true
+                                )
+                            }
+                            else -> {
+                                updateTryOtherGestureUI()
+                            }
+                        }
+                        break
+                    } else {
+                        val message = when (action) {
+                            CameraAction.CAPTURE_PHOTO -> context.getString(R.string.cooldown_try_gesture_in, remaining)
+                            CameraAction.START_VIDEO_RECORDING -> context.getString(R.string.cooldown_video_period, remaining)
+                            CameraAction.STOP_VIDEO_RECORDING -> context.getString(R.string.cooldown_video_start_period, remaining)
+                            CameraAction.TOGGLE_FLASH -> context.getString(R.string.cooldown_flash_toggle_remaining, remaining)
+                            CameraAction.SWITCH_CAMERA -> context.getString(R.string.cooldown_camera_switch_remaining, remaining)
+                            CameraAction.ZOOM_IN -> context.getString(R.string.cooldown_try_gesture_in, remaining)
+                            CameraAction.ZOOM_OUT -> context.getString(R.string.cooldown_try_gesture_in, remaining)
+                            CameraAction.OPEN_GALLERY -> context.getString(R.string.cooldown_try_gesture_in, remaining)
+                            else -> context.getString(R.string.cooldown_try_gesture_in, remaining)
+                        }
+                        
+                        _uiState.value = _uiState.value.copy(
+                            cooldownMessage = message, showCooldown = true
+                        )
+                    }
+                    
                     delay(1000L)
-                    _uiState.value = _uiState.value.copy(
-                        showCooldown = false, cooldownMessage = null
-                    )
-                } else {
-                    _uiState.value = _uiState.value.copy(
-                        showCooldown = false, cooldownMessage = null
-                    )
                 }
             } catch (e: Exception) {
             }
@@ -305,7 +338,7 @@ class ProcessGestureUseCase(
 
     private fun updateRecordingBlockUI() {
         _uiState.value = _uiState.value.copy(
-            cooldownMessage = context.getString(R.string.cooldown_gestures_blocked_recording),
+            cooldownMessage = context.getString(R.string.action_stop_video_first),
             showCooldown = true
         )
     }

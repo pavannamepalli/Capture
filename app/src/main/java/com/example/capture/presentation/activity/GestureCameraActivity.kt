@@ -212,6 +212,11 @@ class GestureCameraActivity : AppCompatActivity() {
 
                 result.fold(
                     onSuccess = { actionResult ->
+                        if (actionResult.success) {
+                            val message = actionResult.message ?: getString(R.string.ui_action_completed)
+                            android.widget.Toast.makeText(this@GestureCameraActivity, message, android.widget.Toast.LENGTH_SHORT).show()
+                        }
+                        
                         uiUpdater.updateActionFeedback(
                             action = actionResult.action.name,
                             success = actionResult.success,
@@ -245,10 +250,12 @@ class GestureCameraActivity : AppCompatActivity() {
                 )
 
             } catch (e: Exception) {
+                val errorMessage = getString(R.string.ui_error_prefix, e.message ?: "")
+                
                 uiUpdater.updateActionFeedback(
                     action = getString(R.string.action_name_unknown),
                     success = false,
-                    message = getString(R.string.ui_error_prefix, e.message ?: "")
+                    message = errorMessage
                 )
             }
         }

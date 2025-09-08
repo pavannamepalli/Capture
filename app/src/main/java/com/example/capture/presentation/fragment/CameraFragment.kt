@@ -294,15 +294,15 @@ class CameraFragment : Fragment(), HandLandmarkerHelper.LandmarkerListener {
     private fun updateActionFeedback(uiState: GestureCameraUiState) {
         uiState.lastActionResult?.let { result ->
             if (uiState.showActionFeedback) {
-                val message = if (result.success) {
-                    result.message ?: getString(R.string.ui_action_completed)
+                if (result.success) {
+                    // Show only successful actions as toast
+                    val message = result.message ?: getString(R.string.ui_action_completed)
+                    android.widget.Toast.makeText(requireContext(), message, android.widget.Toast.LENGTH_SHORT).show()
                 } else {
-                    getString(R.string.ui_error_prefix, result.message ?: "")
+                    // Show errors in overlay at bottom
+                    val errorMessage = getString(R.string.ui_error_prefix, result.message ?: "")
+                    fragmentCameraBinding.gestureOverlay.updateCooldown(errorMessage)
                 }
-
-                fragmentCameraBinding.gestureOverlay.updateAction(message)
-
-
             }
         }
 

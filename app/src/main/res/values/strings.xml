@@ -126,6 +126,9 @@
     <string name="action_zoomed_out">Zoomed out</string>
     <string name="action_gallery_opened">Gallery opened</string>
     <string name="action_no_gesture_detected">No gesture detected</string>
+    <string name="action_flash_front_camera">Flash won\'t work on front camera</string>
+    <string name="action_can_stop_video">You can stop video recording</string>
+    <string name="action_stop_video_first">First stop video recording \n then proceed to other gesture</string>
 
     <string name="cooldown_try_gesture_in">Try gesture in %1$ds</string>
     <string name="cooldown_try_other_gesture">Try other gesture</string>
