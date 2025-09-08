@@ -170,24 +170,162 @@ app/src/main/java/com/example/gesture/
 - `READ_EXTERNAL_STORAGE`: For gallery access (Android 10 and below)
 - `QUERY_ALL_PACKAGES`: For gallery app detection (Android 11+)
 
-## 🎮 Usage
+## 🎮 How to Use This App
 
-### Basic Operation
-1. **Launch the app** and grant necessary permissions
-2. **Position your hand** within the gesture detection area (indicated by overlay)
-3. **Perform gestures** to control the camera:
-   - Show open palm to capture photos
-   - Make peace sign to start/stop video recording
-   - Thumbs up to switch cameras
-   - OK sign to open gallery
-   - Pinch gestures to zoom in/out
-   - Three fingers up to toggle flash
+### Getting Started
 
-### Gesture Tips
-- Ensure good lighting for better gesture recognition
-- Keep your hand within the detection area
-- Hold gestures steady for 1-2 seconds for reliable detection
-- Avoid rapid gesture changes to prevent false triggers
+#### 1. **First Launch**
+- Open the app and grant **Camera** and **Microphone** permissions when prompted
+- The app will start with the camera view and a gesture detection overlay
+- You'll see a white rectangular box in the center - this is your **gesture detection area**
+
+#### 2. **Understanding the Interface**
+- **Camera Preview**: Live camera feed in the background
+- **Detection Box**: White rectangular overlay where you perform gestures
+- **Recording Indicator**: Red dot with "REC" text when video is recording
+- **Gesture Feedback**: Messages appear at the bottom of the screen
+- **Toast Notifications**: Action confirmations appear as popup messages
+
+### Gesture Controls
+
+#### 📸 **Photo Capture**
+- **Gesture**: ✋ **Open Palm** (all fingers extended)
+- **Action**: Captures a photo and saves it to gallery
+- **Feedback**: Toast shows "Photo captured and saved to memory"
+- **Cooldown**: 3-second countdown, then "Try other gesture" message
+
+#### 🎥 **Video Recording**
+- **Start Recording**: ✌️ **Peace Sign** (index and middle finger up)
+  - Toast shows "Video recording started"
+  - Red recording indicator appears
+  - 1-second cooldown, then "You can stop video recording" message
+- **Stop Recording**: ✌️ **Peace Sign** again
+  - Toast shows "Video recording stopped and video saved to memory"
+  - Recording indicator disappears
+  - 2-second cooldown, then "Try other gesture" message
+
+#### 📷 **Camera Switching**
+- **Gesture**: 👍 **Thumbs Up** (thumb extended, other fingers closed)
+- **Action**: Switches between front and rear cameras
+- **Feedback**: Toast shows "Camera switched"
+- **Cooldown**: 3-second countdown, then "Try other gesture" message
+
+#### 🖼️ **Gallery Access**
+- **Gesture**: 👌 **OK Sign** (thumb and index finger forming circle)
+- **Action**: Opens the device's gallery app
+- **Feedback**: Toast shows "Gallery opened"
+- **Cooldown**: 3-second countdown, then "Try other gesture" message
+
+#### 🔍 **Zoom Control**
+- **Zoom In**: 🤏 **Pinch Zoom In** (fingers moving apart)
+  - Toast shows "Zoomed in"
+  - 3-second cooldown, then "Try other gesture" message
+- **Zoom Out**: 🤏 **Pinch Zoom Out** (fingers moving together)
+  - Toast shows "Zoomed out"
+  - 3-second cooldown, then "Try other gesture" message
+
+#### 💡 **Flash Control**
+- **Gesture**: 🤟 **Three Fingers Up** (thumb, index, and pinky extended)
+- **Back Camera**: Toggles flash on/off
+  - Toast shows "Flash toggled"
+  - 2-second cooldown, then "Try other gesture" message
+- **Front Camera**: Shows "Flash won't work on front camera" toast
+  - No cooldown (informational message only)
+
+### Understanding Feedback Messages
+
+#### **Toast Messages** (Popup notifications)
+- ✅ **Success Actions**: "Photo captured", "Video recording started", etc.
+- ℹ️ **Information**: "Flash won't work on front camera"
+- ⚠️ **Errors**: "Error: [error details]"
+
+#### **Overlay Messages** (Bottom of screen)
+- **Countdown Timers**: "Try gesture in 3s", "Try gesture in 2s", "Try gesture in 1s"
+- **Cooldown Complete**: "Try other gesture" (for most actions)
+- **Video Recording**: "You can stop video recording" (after video start cooldown)
+- **Blocked Actions**: "First stop video recording \n then proceed to other gesture"
+
+### Step-by-Step Usage Examples
+
+#### **Taking a Photo**
+1. Point camera at your subject
+2. Position your hand within the white detection box
+3. Extend all fingers (open palm gesture)
+4. Hold for 1-2 seconds until you see "Photo captured" toast
+5. Wait for countdown to complete before taking another photo
+
+#### **Recording a Video**
+1. Point camera at your subject
+2. Make peace sign (✌️) within the detection box
+3. Wait for "Video recording started" toast and red recording indicator
+4. When finished, make peace sign (✌️) again
+5. Wait for "Video recording stopped" toast
+
+#### **Switching Cameras**
+1. Make thumbs up (👍) gesture within the detection box
+2. Wait for "Camera switched" toast
+3. Camera will switch between front and rear
+4. Wait for countdown before switching again
+
+### Best Practices
+
+#### **For Better Recognition**
+- **Lighting**: Ensure good, even lighting on your hand
+- **Position**: Keep your hand centered in the white detection box
+- **Stability**: Hold gestures steady for 1-2 seconds
+- **Distance**: Keep hand 1-2 feet from camera for optimal detection
+- **Background**: Use solid, contrasting backgrounds when possible
+
+#### **Avoiding Issues**
+- **Don't rush**: Wait for countdown to complete before next gesture
+- **One gesture at a time**: Don't try multiple gestures simultaneously
+- **Clear gestures**: Make sure your gesture is clearly visible and distinct
+- **No rapid changes**: Avoid switching between gestures too quickly
+
+#### **During Video Recording**
+- **Limited controls**: Only peace sign works to stop recording
+- **Other gestures blocked**: You'll see "First stop video recording" message
+- **Stop first**: Always stop video before using other gestures
+
+### Troubleshooting Common Issues
+
+#### **Gesture Not Recognized**
+- Check if hand is within the white detection box
+- Ensure good lighting conditions
+- Make sure gesture is clear and distinct
+- Wait for any active countdown to complete
+
+#### **App Not Responding**
+- Restart the app
+- Check camera permissions
+- Ensure no other apps are using the camera
+- Try switching between front and rear cameras
+
+#### **Poor Performance**
+- Close other running applications
+- Ensure device has sufficient battery
+- Try in better lighting conditions
+- Restart the device if issues persist
+
+### Advanced Tips
+
+#### **Gesture Timing**
+- **Cooldown periods** prevent accidental multiple triggers
+- **Dynamic countdown** shows remaining time
+- **"Try other gesture"** appears when ready for next action
+- **Video recording** has special timing rules
+
+#### **Camera Features**
+- **Front camera**: Flash control shows informational message
+- **Back camera**: Full flash control available
+- **Zoom**: Works on both cameras
+- **Gallery**: Opens system gallery app
+
+#### **Performance Optimization**
+- **Frame skipping**: App automatically optimizes for performance
+- **Background processing**: ML inference runs on background threads
+- **Memory management**: Efficient handling of camera frames
+- **Battery optimization**: Minimal impact on device battery
 
 ## 🔧 Configuration
 

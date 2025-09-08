@@ -168,8 +168,11 @@ class GestureOverlayView(context: Context?, attrs: AttributeSet?) : View(context
     }
 
     private fun drawCooldownStatus(canvas: Canvas, cooldown: String) {
+        val isErrorMessage = cooldown.startsWith("Error:")
+        val textColor = if (isErrorMessage) Color.RED else Color.WHITE
+        
         val cooldownPaint = Paint().apply {
-            color = Color.WHITE
+            color = textColor
             textSize = 48f
             typeface = Typeface.DEFAULT_BOLD
             isAntiAlias = true
