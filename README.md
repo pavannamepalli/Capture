@@ -406,7 +406,8 @@ The application provides real-time performance monitoring:
 
 ## 📄 License
 
-This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
+This repository is licensed under All Rights Reserved.
+Viewing is permitted. Any use, modification, or distribution requires explicit permission. See the [LICENSE](LICENSE) file for details.
 
 ## 🤝 Contributing
 
